@@ -1,0 +1,76 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+.slider {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 15px;
+  border-radius: 5px;
+  background: #d3d3d3;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: #4CAF50;
+  cursor: pointer;
+}
+
+.td-slider{
+  display:flex;
+}
+
+.td-slider div:nth-child(2){
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.search-device{
+  display: flex;
+}
+
+.top-form{
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+
+.title{
+  margin-top: 20px;
+  text-align: center;
+  font-size: 30px;
+}
+
+.genres{
+  margin-top: 10px;
+}
+
+.genre {
+  margin-top: 20px;
+}
+
+.attribute-table{
+  margin-top: 30px;
+}
+
+.action-bar{
+  display: flex;
+}
