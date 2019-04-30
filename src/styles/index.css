@@ -6,11 +6,37 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #F7FFF7;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+#login {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+}
+
+#login h1 {
+  font-size: 10vw;
+  margin-bottom: 2vh;
+  color: #4CAF50;
+}
+#login h2 {
+  font-size: 6vw;
+  color: #292F36;
+  transition: 500ms;
+}
+
+#login h2:hover {
+  transition: 500ms;
+  transform: scale(1.05);
 }
 
 .slider {

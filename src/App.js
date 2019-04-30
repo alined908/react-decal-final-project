@@ -144,9 +144,13 @@ class App extends Component {
   render() {
     if (!this.state.authenticated) {
       return (
-        <a href={`https://accounts.spotify.com/authorize/?client_id=${clientId}&response_type=token&redirect_uri=${redirectUri}&scope=user-read-playback-state user-modify-playback-state user-top-read user-read-private`}>
-          Login with Spotify
-        </a>
+        <div id="login">
+          <h1>Slide Into Spotify</h1>
+          <a href={`https://accounts.spotify.com/authorize/?client_id=${clientId}&response_type=token&redirect_uri=${redirectUri}&scope=user-read-playback-state user-modify-playback-state user-top-read user-read-private`}>
+          <h2>Login with your Spotify Account</h2>
+          </a>
+        </div>
+        
       );
     }
 
