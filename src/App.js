@@ -10,7 +10,7 @@ import Song from "./components/Song"
 import Artist from "./components/Artist"
 
 // Replace with your app's client ID, redirect URI and desired scopes
-const clientId = "8cd26c63ef1a43529fa5ff13fc7dcb09";
+const clientId = "YOUR_CLIENT_ID";
 const redirectUri = "http://localhost:3000/callback";
 
 class App extends Component {
@@ -24,19 +24,30 @@ class App extends Component {
       songs: [],
       genres: [],
       sliderValues: {
-        Acousticness: 0,
-        Danceability: 0,
-        Energy: 0,
-        Instrumentalness: 0,
-        Liveness: 0,
-        Speechiness: 0,
-        Popularity: 0,
-        Valence: 0
+        Acousticness: 0.5,
+        Danceability: 0.5,
+        Energy: 0.5,
+        Instrumentalness: 0.5,
+        Liveness: 0.5,
+        Speechiness: 0.5,
+        Popularity: 50,
+        Valence: 0.5
+      },
+      inUse: {
+        Acousticness: true,
+        Danceability: true,
+        Energy: true,
+        Instrumentalness: true,
+        Liveness: true,
+        Speechiness: true,
+        Popularity: true,
+        Valence: true
       }
     };
     this.getRecommend = this.getRecommend.bind(this);
     this.getGenres = this.getGenres.bind(this);
     this.handleGetValue = this.handleGetValue.bind(this);
+    this.handleGetInUse = this.handleInUse.bind(this);
   }
 
    shuffle(a) {
@@ -58,11 +69,18 @@ class App extends Component {
 
       const {devices} = await this.spotifyClient.getMyDevices();
       // const devices = Object.keys(devicesResp).map(key => devicesResp[key]);
-      this.setState({
-        authenticated: true,
-        devices,
-        currentDevice: devices[0].id
-      });
+      if (devices.length > 0) {
+        this.setState({
+          authenticated: true,
+          devices,
+          currentDevice: devices[0].id
+        });
+      } else {
+        alert("Make sure your spotify id and redirect URI is correctly set in the Spotify Developer page.");
+        this.setState({
+          authenticated: false
+        });
+      }
     }
   }
 
@@ -72,6 +90,14 @@ class App extends Component {
     copy[name] = e.target.value;
     this.setState({
       sliderValues: copy
+    });
+  }
+
+  handleInUse(attribute) {
+    var copy = this.state.inUse;
+    copy[attribute] = !copy[attribute];
+    this.setState({
+      inUse: copy
     });
   }
 
@@ -90,7 +116,9 @@ class App extends Component {
     var query = {"seed_genres": this.state.search}
     var attributes = this.state.sliderValues;
     for (var key in attributes) {
-      query["target_"+key.toLowerCase()] = parseFloat(attributes[key]);
+      if (this.state.inUse[key]) {
+        query["target_"+key.toLowerCase()] = parseFloat(attributes[key]);
+      }
     }
     //console.log(query);
 
@@ -163,16 +191,20 @@ class App extends Component {
             <table>
               <colgroup>
                 <col width="15%"></col>
-                <col width="60%"></col>
-                <col width="25%"></col>
+                <col width="55%"></col>
+                <col width="20%"></col>
+                <col width="10%"></col>
               </colgroup>
               <tr>
                 <th>Attribute</th>
                 <th>Description</th>
                 <th>Slider</th>
+                <th>Search with Attribute</th>
               </tr>
               {TrackAttributes.attributes.map((attr) => (
-                <Slider getValue={this.handleGetValue} sliderName={attr.name} val={this.state.sliderValues[attr.name]} sliderDescription={attr.description} step={attr.step} min={attr.min} max={attr.max}/>
+                <Slider getValue={this.handleGetValue} sliderName={attr.name} val={this.state.sliderValues[attr.name]}
+                  sliderDescription={attr.description} step={attr.step} min={attr.min} max={attr.max}
+                  inUse={this.state.inUse[attr.name]} changeInUse={() => this.handleInUse(attr.name)} />
               ))}
             </table>
             <br></br>

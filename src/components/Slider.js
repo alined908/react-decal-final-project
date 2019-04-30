@@ -17,6 +17,11 @@ class Slider extends React.Component {
           </div>
           <div>{this.props.val}</div>
         </td>
+        <td>
+          <div>
+            <input type="checkbox" checked={this.props.inUse} onClick={this.props.changeInUse} ></input>
+          </div>
+        </td>
       </tr>
     )
   }
