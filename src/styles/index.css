@@ -70,9 +70,6 @@ code {
   margin-right: 5px;
 }
 
-
-
-
 .top-form{
   margin-bottom: 20px;
   margin-top: 20px;
@@ -81,6 +78,23 @@ code {
   justify-content: center;
   align-items: center;
 }
+
+#container {
+  margin: 0;
+  padding: 0;
+}
+
+#main-content {
+  display: inline;
+}
+
+.attribute-table{
+  margin-top: 30px;
+  width: 50vw;
+  float: left;
+}
+
+
 
 .title{
   margin-top: 20px;
@@ -100,9 +114,7 @@ code {
   margin-top: 20px;
 }
 
-.attribute-table{
-  margin-top: 30px;
-}
+
 
 .action-bar{
   display: flex;
@@ -161,4 +173,13 @@ option {
 
 table, tr {
   margin: 24px;
+}
+
+ul {
+  padding: 0px;
+  margin: 0px;
+}
+
+.ui.link.cards {
+  margin-top: 30px;
 }

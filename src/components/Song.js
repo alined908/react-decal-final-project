@@ -21,7 +21,7 @@ class Song extends React.Component {
   render (){
     return (
       <div
-        className="ui one column card"
+        className="card"
         key={this.props.uri}
         onClick={e => this.startPlayback(this.props.uri)}
       >

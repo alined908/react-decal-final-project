@@ -8,6 +8,7 @@ import Slider from "./components/Slider"
 import Genre from "./components/Genre"
 import Song from "./components/Song"
 import Artist from "./components/Artist"
+import { arrayExpression } from "@babel/types";
 
 // Replace with your app's client ID, redirect URI and desired scopes
 const clientId = "55c84944763743b8b51dedcea1dd0c89";
@@ -42,7 +43,8 @@ class App extends Component {
         Speechiness: true,
         Popularity: true,
         Valence: true
-      }
+      },
+      message: ""
     };
     this.getRecommend = this.getRecommend.bind(this);
     this.getGenres = this.getGenres.bind(this);
@@ -122,24 +124,49 @@ class App extends Component {
     }
     //console.log(query);
 
-    const {tracks: [wtf]} = await this.spotifyClient.getRecommendations(query);
-    if (wtf === undefined){
-      alert("Not a valid genre. Maybe use the genre generator");
-      return;
+    let attempts = 0;
+    while (attempts < 5) {
+      const {tracks: [wtf]} = await this.spotifyClient.getRecommendations(query);
+      if (wtf === undefined){
+        alert("Not a valid genre. Maybe use the genre generator");
+        return;
+      }
+
+      let repeat = false;
+      for (let i = 0; i < this.state.songs.length; i++) {
+        if (this.state.songs[i].name === wtf.name) {
+          repeat = true;
+        }
+      }
+      if (!repeat) {
+        const hello = {
+          album: wtf.album,
+          uri: wtf.uri.split(":")[2],
+          name: wtf.name,
+          img: wtf.album.images[1].url,
+          artists: wtf.artists
+        }
+        var copy = [...this.state.songs];
+        copy.push(hello)
+        this.setState({
+          songs: copy
+        });
+
+        break;
+      } else {
+        attempts++;
+      }
+      
+      console.log(attempts);
     }
-    const hello = {
-      album: wtf.album,
-      uri: wtf.uri.split(":")[2],
-      name: wtf.name,
-      img: wtf.album.images[1].url,
-      artists: wtf.artists
+    if (attempts >= 5) {
+      this.setState({message: "Can't find a unique song."}) 
+    } else {
+      this.setState({message: ""}) 
     }
-    var copy = [...this.state.songs];
-    copy.push(hello)
-    this.setState({
-      songs: copy
-    });
+    
   }
+
 
   render() {
     if (!this.state.authenticated) {
@@ -156,7 +183,7 @@ class App extends Component {
 
     else {
       return (
-        <div className="ui container">
+        <div id="container">
           <div className="title">
             <h1>Slide Into Spotify</h1>
           </div>
@@ -182,6 +209,7 @@ class App extends Component {
                 onChange={e => this.setState({ search: e.target.value })}
               />
               <input id="search-button"type="submit" onClick={this.getRecommend} value="Search" />
+              <p id="input-message">{this.state.message}</p>
               
             </div>
             <input id="generate-genre-button" type="submit" onClick={this.getGenres} value="Generate Sample Genres" />
@@ -195,34 +223,38 @@ class App extends Component {
             </div>
           </div>
 
-          <div className="attribute-table">
-            <table>
-              <colgroup>
-                <col width="15%"></col>
-                <col width="55%"></col>
-                <col width="20%"></col>
-                <col width="10%"></col>
-              </colgroup>
-              <tr id="col-names">
-                <th>Attribute</th>
-                <th>Description</th>
-                <th>Slider</th>
-                <th>Search with Attribute</th>
-              </tr>
-              {TrackAttributes.attributes.map((attr) => (
-                <Slider getValue={this.handleGetValue} sliderName={attr.name} val={this.state.sliderValues[attr.name]}
-                  sliderDescription={attr.description} step={attr.step} min={attr.min} max={attr.max}
-                  inUse={this.state.inUse[attr.name]} changeInUse={() => this.handleInUse(attr.name)} />
+          <div id="main-content">
+            <div className="attribute-table">
+              <table>
+                <colgroup>
+                  <col width="15%"></col>
+                  <col width="55%"></col>
+                  <col width="20%"></col>
+                  <col width="10%"></col>
+                </colgroup>
+                <tr id="col-names">
+                  <th>Attribute</th>
+                  <th>Description</th>
+                  <th>Slider</th>
+                  <th>Search with Attribute</th>
+                </tr>
+                {TrackAttributes.attributes.map((attr) => (
+                  <Slider getValue={this.handleGetValue} sliderName={attr.name} val={this.state.sliderValues[attr.name]}
+                    sliderDescription={attr.description} step={attr.step} min={attr.min} max={attr.max}
+                    inUse={this.state.inUse[attr.name]} changeInUse={() => this.handleInUse(attr.name)} />
+                ))}
+                {/* sliderDescription={attr.description} */}
+              </table>
+            </div>
+
+            
+            <div class="ui link cards">
+              {this.state.songs.map(song => (
+                <Song device={this.state.devices[0]} uri={song.uri} name={song.name} artists={song.artists} img={song.img}/>
               ))}
-            </table>
-            <br></br>
+            </div>
           </div>
 
-          <div className="ui container six column grid songs-display">
-            {this.state.songs.map(song => (
-              <Song device={this.state.devices[0]} uri={song.uri} name={song.name} artists={song.artists} img={song.img}/>
-            ))}
-          </div>
         </div>
       );
     }
