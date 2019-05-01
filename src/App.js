@@ -10,7 +10,7 @@ import Song from "./components/Song"
 import Artist from "./components/Artist"
 
 // Replace with your app's client ID, redirect URI and desired scopes
-const clientId = "YOUR_CLIENT_ID";
+const clientId = "55c84944763743b8b51dedcea1dd0c89";
 const redirectUri = "http://localhost:3000/callback";
 
 class App extends Component {
@@ -158,29 +158,33 @@ class App extends Component {
       return (
         <div className="ui container">
           <div className="title">
-            Slide Into Spotify
+            <h1>Slide Into Spotify</h1>
           </div>
+          
 
           <div className="top-form">
+
+            <div className="search-device">
+              <select
+                className="ui dropdown"
+                onChange={e => this.setState({ currentDevice: e.target.value })}
+              >
+                {this.state.devices.map(device => (
+                  <option class="option" value={device.id}>{device.name}</option>
+                ))}
+              </select>
+            </div>
             <div className="ui form action-bar">
-              <input id="generate-genre-button" type="submit" onClick={this.getGenres} value="Generate Sample Genres" />
-              <input
+              
+              <input id="search-bar"
                 placeholder="Enter genre(s) here: Ex. pop or hip-hop, country"
                 type="text"
                 onChange={e => this.setState({ search: e.target.value })}
               />
-              <input type="submit" onClick={this.getRecommend} value="Search" />
-              <div className="search-device">
-                <select
-                  className="ui dropdown"
-                  onChange={e => this.setState({ currentDevice: e.target.value })}
-                >
-                  {this.state.devices.map(device => (
-                    <option value={device.id}>{device.name}</option>
-                  ))}
-                </select>
-              </div>
+              <input id="search-button"type="submit" onClick={this.getRecommend} value="Search" />
+              
             </div>
+            <input id="generate-genre-button" type="submit" onClick={this.getGenres} value="Generate Sample Genres" />
           </div>
 
           <div className="genre">
@@ -199,7 +203,7 @@ class App extends Component {
                 <col width="20%"></col>
                 <col width="10%"></col>
               </colgroup>
-              <tr>
+              <tr id="col-names">
                 <th>Attribute</th>
                 <th>Description</th>
                 <th>Slider</th>

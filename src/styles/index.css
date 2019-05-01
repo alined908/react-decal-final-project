@@ -70,19 +70,26 @@ code {
   margin-right: 5px;
 }
 
-.search-device{
-  display: flex;
-}
+
+
 
 .top-form{
   margin-bottom: 20px;
   margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .title{
   margin-top: 20px;
   text-align: center;
-  font-size: 30px;
+}
+
+.title h1{
+  color: #4CAF50;
+  font-size: 48px;
 }
 
 .genres{
@@ -99,4 +106,59 @@ code {
 
 .action-bar{
   display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.search-device {
+  display: flex;
+}
+
+#search-bar {
+  width:40vw;
+  height: 48px;
+  font-size: 16px;
+}
+option {
+  background-color: #7DCFB6;
+  color: black;
+  border: 2px solid #4CAF50;
+  font-size: 16px;
+}
+
+#search-button, #generate-genre-button, .ui-dropdown, .option {
+  background-color: #7DCFB6;
+  color: black;
+  border: 2px solid #4CAF50;
+  font-size: 16px;
+  transition: 250ms;
+}
+
+#search-button {
+  margin: 16px;
+  width: 128px;
+  height: 48px;
+}
+
+#generate-genre-button {
+  margin: 16px;
+  width: 256px;
+  height: 48px;
+  border-radius: 24px;
+}
+
+#generate-genre-button:hover, #search-button:hover {
+  cursor: pointer;
+  background-color: #4CAF50;
+  transition: 250ms;
+}
+
+#col-names {
+  font-size: 24px;
+  padding-bottom: 296px;
+}
+
+table, tr {
+  margin: 24px;
 }
