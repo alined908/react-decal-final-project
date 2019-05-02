@@ -1,4 +1,8 @@
-### How To Run Slide into Spotify
+### Access a demo of this project at
+
+https://slideintospotify.netlify.com/
+
+### How to run "Slide into Spotify" on your computer
 
 To authorize your spotify account and use your personal devices to play/search for music using the Slide into Spotify app, you must follow the following steps
 
