@@ -141,24 +141,17 @@ code {
   width: 25vw;
 }
 
-#play {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
 
+.play.icon, .pause.icon {
   margin-top: 32px;
-}
-
-
-.play.icon {
+  display:inline-block;
   cursor: pointer;
-  width: 20px;
   transition: 250ms;
+  font-size: 40px;
 }
 
-.play.icon:hover {
-  transform: scale(1.25);
+.play.icon:hover, .pause.icon:hover {
+  transform: scale(1.15);
   transition: 250ms;
 }
 
@@ -221,6 +214,7 @@ option {
 table, tr {
   margin: 24px;
 }
+
 
 ul {
   padding: 0px;

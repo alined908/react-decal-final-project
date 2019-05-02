@@ -13,8 +13,7 @@ import { arrayExpression } from "@babel/types";
 
 // Replace with your app's client ID, redirect URI and desired scopes
 const clientId = "55c84944763743b8b51dedcea1dd0c89";
-const redirectUri = "http://localhost:3000/callback";
-//"https://slideintospotify.netlify.com";
+const redirectUri = "https://slideintospotify.netlify.com";
 
 class App extends Component {
   constructor(props) {

@@ -6,7 +6,9 @@ class MusicControl extends React.Component {
     super(props);
     this.state = {
       currentDevice: this.props.device.id,
-      playing: false
+      playing: false,
+      play: "play icon",
+      pause: "pause icon"
     };
     this.spotifyClient = new Spotify();
   }
@@ -16,12 +18,12 @@ class MusicControl extends React.Component {
       await this.spotifyClient.play({
         device_id: this.state.currentDevice
       });
-      this.setState({playing: true});
+      this.setState({play: "pause icon", playing: true});
     } else {
       await this.spotifyClient.pause({
         device_id: this.state.currentDevice
       });
-      this.setState({playing: false});
+      this.setState({play: "play icon", playing: false});
     }
     
   }
@@ -33,10 +35,7 @@ class MusicControl extends React.Component {
   render (){
     return (
       <div id="control"> 
-        <div id="play">
-          <p>Play/Pause:</p>
-         <i class="play icon" onClick={e => this.playSong()}></i>
-        </div>
+         <i class={this.state.play} onClick={e => this.playSong()}></i>
         
         <div id="volume">
           <i class="volume off icon"></i>
