@@ -108,12 +108,59 @@ code {
 
 .genres{
   margin-top: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 60vw;
 }
 
 .genre {
   margin-top: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 }
 
+.ui.label {
+  margin: 8px;
+}
+
+#control {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#volume {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 25vw;
+}
+
+#play {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  margin-top: 32px;
+}
+
+
+.play.icon {
+  cursor: pointer;
+  width: 20px;
+  transition: 250ms;
+}
+
+.play.icon:hover {
+  transform: scale(1.25);
+  transition: 250ms;
+}
 
 
 .action-bar{

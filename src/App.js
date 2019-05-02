@@ -8,11 +8,13 @@ import Slider from "./components/Slider"
 import Genre from "./components/Genre"
 import Song from "./components/Song"
 import Artist from "./components/Artist"
+import MusicControl from "./components/MusicControl"
 import { arrayExpression } from "@babel/types";
 
 // Replace with your app's client ID, redirect URI and desired scopes
 const clientId = "55c84944763743b8b51dedcea1dd0c89";
-const redirectUri = "slideintospotify.netlify.com";
+const redirectUri = "http://localhost:3000/callback";
+//"https://slideintospotify.netlify.com";
 
 class App extends Component {
   constructor(props) {
@@ -32,7 +34,8 @@ class App extends Component {
         Liveness: 0.5,
         Speechiness: 0.5,
         Popularity: 50,
-        Valence: 0.5
+        Valence: 0.5,
+        Volume: 50
       },
       inUse: {
         Acousticness: true,
@@ -90,6 +93,8 @@ class App extends Component {
     var name = e.target.id;
     var copy = this.state.sliderValues;
     copy[name] = e.target.value;
+    // console.log(e.target.id)
+    // console.log(e.target.value)
     this.setState({
       sliderValues: copy
     });
@@ -122,7 +127,6 @@ class App extends Component {
         query["target_"+key.toLowerCase()] = parseFloat(attributes[key]);
       }
     }
-    //console.log(query);
 
     let attempts = 0;
     while (attempts < 5) {
@@ -156,8 +160,7 @@ class App extends Component {
       } else {
         attempts++;
       }
-      
-      console.log(attempts);
+    
     }
     if (attempts >= 5) {
       this.setState({message: "Can't find a unique song."}) 
@@ -216,12 +219,15 @@ class App extends Component {
           </div>
 
           <div className="genre">
-            <div className="genres ui container eight column grid">
+            <div className="genres ui grid">
               {this.state.genres.map((genre) => (
                 <Genre name={genre}/>
               ))}
             </div>
           </div>
+
+          
+          <MusicControl device={this.state.devices[0]} sliderName={"Volume"} val={this.state.sliderValues["Volume"]} getValue={this.handleGetValue}/>
 
           <div id="main-content">
             <div className="attribute-table">

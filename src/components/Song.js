@@ -11,7 +11,6 @@ class Song extends React.Component {
   }
 
   async startPlayback(songId) {
-    console.log(songId);
     await this.spotifyClient.play({
       device_id: this.state.currentDevice,
       uris: [`spotify:track:${songId}`]

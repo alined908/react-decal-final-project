@@ -8,7 +8,7 @@ class Genre extends React.Component {
 
   render (){
     return (
-      <div className="ui one column card">{this.props.name}</div>
+      <div className="ui label">{this.props.name}</div>
     )
   }
 }
