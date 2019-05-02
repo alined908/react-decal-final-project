@@ -1,8 +1,8 @@
-### Access a demo of this project at
+# Access a demo of this project at
 
 https://slideintospotify.netlify.com/
 
-### How to run "Slide into Spotify" on your computer
+# How to run "Slide into Spotify" on your computer
 
 To authorize your spotify account and use your personal devices to play/search for music using the Slide into Spotify app, you must follow the following steps
 
@@ -15,7 +15,7 @@ To authorize your spotify account and use your personal devices to play/search f
 
 Note: Make sure you have a Spotify application running on one of your devices.
 
-### Write-Up
+# Write-Up
 Title: Slide into Spotify
 Team Members: Jordan Flores, Antonio Franco, Daniel Lee
 Team Name: Three Nude Men
